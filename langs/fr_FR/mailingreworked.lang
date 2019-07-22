@@ -17,10 +17,9 @@
 # Générique
 #
 
-# Module label 'ModuleMailingreworkedName'
-ModuleMailingreworkedName = Mailingreworked
-# Module description 'ModuleMailingreworkedDesc'
-ModuleMailingreworkedDesc = Description de Mailingreworked
+
+ModuleMailingreworkedName = Mailing Reworked
+ModuleMailingreworkedDesc = Refonte du module d'emailing de Dolibarr
 
 #
 # Page d'administration

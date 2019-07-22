@@ -46,30 +46,30 @@ class modMailingreworked extends DolibarrModules
 
 		// Id for module (must be unique).
 		// Use here a free id (See in Home -> System information -> Dolibarr for list of used modules id).
-		$this->numero = 500000;		// TODO Go on page https://wiki.dolibarr.org/index.php/List_of_modules_id to reserve id number for your module
+		$this->numero = 468050;		// TODO Go on page https://wiki.dolibarr.org/index.php/List_of_modules_id to reserve id number for your module
 		// Key text used to identify module (for permissions, menus, etc...)
 		$this->rights_class = 'mailingreworked';
 
 		// Family can be 'base' (core modules),'crm','financial','hr','projects','products','ecm','technic' (transverse modules),'interface' (link with external tools),'other','...'
 		// It is used to group modules by family in module setup page
-		$this->family = "other";
+		$this->family = "Mailing Reworked - Flavien Belli";
 		// Module position in the family on 2 digits ('01', '10', '20', ...)
-		$this->module_position = '90';
+		$this->module_position = '01';
 		// Gives the possibility for the module, to provide his own family info and position of this family (Overwrite $this->family and $this->module_position. Avoid this)
 		//$this->familyinfo = array('myownfamily' => array('position' => '01', 'label' => $langs->trans("MyOwnFamily")));
 
 		// Module label (no space allowed), used if translation string 'ModuleMailingreworkedName' not found (Mailingreworked is name of module).
-		$this->name = preg_replace('/^mod/i','',get_class($this));
+		$this->name = "ModuleMailingreworkedName";
 		// Module description, used if translation string 'ModuleMailingreworkedDesc' not found (Mailingreworked is name of module).
-		$this->description = "MailingreworkedDescription";
+		$this->description = "Refonte du module d'emailing de Dolibarr";
 		// Used only if file README.md and README-LL.md not found.
-		$this->descriptionlong = "Mailingreworked description (Long)";
+		$this->descriptionlong = "Refonte du module d'emailing de Dolibarr pour simplifier et ameliorer l'expérience utilisateur";
 
-		$this->editor_name = 'Editor name';
-		$this->editor_url = 'https://www.example.com';
+		$this->editor_name = 'Flavien Belli';
+		$this->editor_url = 'https://github.com/Marshlyin';
 
 		// Possible values for version are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated' or a version string like 'x.y.z'
-		$this->version = '1.0';
+		$this->version = 'Alpha 1.0';
 
         //Url to the file with your last numberversion of this module
         //$this->url_last_version = 'http://www.example.com/versionmodule.txt';
@@ -209,27 +209,34 @@ class modMailingreworked extends DolibarrModules
 
 		$r=0;
 		$this->rights[$r][0] = $this->numero + $r;	// Permission id (must not be already used)
-		$this->rights[$r][1] = 'Read myobject of Mailingreworked';	// Permission label
+		$this->rights[$r][1] = 'Consulter les emailings';	// Permission label
 		$this->rights[$r][3] = 1; 					// Permission by default for new user (0/1)
 		$this->rights[$r][4] = 'read';				// In php code, permission will be checked by test if ($user->rights->mailingreworked->level1->level2)
 		$this->rights[$r][5] = '';				    // In php code, permission will be checked by test if ($user->rights->mailingreworked->level1->level2)
 
 		$r++;
 		$this->rights[$r][0] = $this->numero + $r;	// Permission id (must not be already used)
-		$this->rights[$r][1] = 'Create/Update myobject of Mailingreworked';	// Permission label
+		$this->rights[$r][1] = 'Créer / modifier les emailings (sujet, destinaire, etc.)';	// Permission label
 		$this->rights[$r][3] = 1; 					// Permission by default for new user (0/1)
 		$this->rights[$r][4] = 'write';				// In php code, permission will be checked by test if ($user->rights->mailingreworked->level1->level2)
 		$this->rights[$r][5] = '';				    // In php code, permission will be checked by test if ($user->rights->mailingreworked->level1->level2)
 
 		$r++;
 		$this->rights[$r][0] = $this->numero + $r;	// Permission id (must not be already used)
-		$this->rights[$r][1] = 'Delete myobject of Mailingreworked';	// Permission label
+		$this->rights[$r][1] = 'Supprimer les emailings';	// Permission label
 		$this->rights[$r][3] = 1; 					// Permission by default for new user (0/1)
 		$this->rights[$r][4] = 'delete';				// In php code, permission will be checked by test if ($user->rights->mailingreworked->level1->level2)
 		$this->rights[$r][5] = '';				    // In php code, permission will be checked by test if ($user->rights->mailingreworked->level1->level2)
 
+        $r++;
+        $this->rights[$r][0] = $this->numero + $r;	// Permission id (must not be already used)
+        $this->rights[$r][1] = 'Gerer les templates d\'email';	// Permission label
+        $this->rights[$r][3] = 1; 					// Permission by default for new user (0/1)
+        $this->rights[$r][4] = 'template';				// In php code, permission will be checked by test if ($user->rights->mailingreworked->level1->level2)
+        $this->rights[$r][5] = '';
 
-		// Main menu entries
+
+        // Main menu entries
 		$this->menu = array();			// List of menus to add
 		$r=0;
 
