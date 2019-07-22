@@ -1,30 +1,16 @@
-# MAILINGREWORKED FOR <a href="https://www.dolibarr.org">DOLIBARR ERP CRM</a>
+# MAILING REWORKED FOR <a href="https://www.dolibarr.org">DOLIBARR ERP CRM</a>
 
 ## Features
-Description...
+Reprise du module de mailing de masse de Dolibarr, en essayant de mettre en oeuvre une interface plus moderne et des fonctionnalités de 
+création de mail facilitées.   
+Développée pour <a href="http://www.effios.fr/">Effios</a> par <a href="https://github.com/Marshlyin"> Flavien Belli </a>
 
 <!--
 ![Screenshot mailingreworked](img/screenshot_mailingreworked.png?raw=true "Mailingreworked"){imgmd}
 -->
 
-Other modules are available on <a href="https://www.dolistore.com" target="_new">Dolistore.com</a>.
+D'autres modules sont disponibles sur  <a href="https://www.dolistore.com" target="_new">Dolistore.com</a>.
 
-
-
-### Translations
-
-Translations can be define manually by editing files into directories *langs*. 
-
-<!--
-This module contains also a sample configuration for Transifex, under the hidden directory [.tx](.tx), so it is possible to manage translation using this service. 
-
-For more informations, see the [translator's documentation](https://wiki.dolibarr.org/index.php/Translator_documentation).
-
-There is a [Transifex project](https://transifex.com/projects/p/dolibarr-module-template) for this module.
--->
-
-
-<!--
 
 Install
 -------
@@ -66,7 +52,7 @@ Note: If this screen tell you there is no custom directory, check your setup is 
 
 ```sh
 cd ....../custom
-git clone git@github.com:gitlogin/mailingreworked.git mailingreworked
+git clone git@github.com:Marshlyin/mailingreworked.git mailingreworked
 ```
 
 ### <a name="final_steps"></a>Final steps
@@ -79,22 +65,18 @@ From your browser:
 
 
 
--->
-
-
 Licenses
 --------
 
 ### Main code
+This software is under GPL3 licence.
 
-![GPLv3 logo](img/gplv3.png)
+![GPL](https://www.dolibiz.com/wp-content/uploads/2017/09/gpl.png "Licence GPL v3")
 
-GPLv3 or (at your option) any later version.
-
-See file COPYING for more information.
 
 #### Documentation
 
-All texts and readmes.
+//TODO
+
 
 ![GFDL logo](img/gfdl.png)
