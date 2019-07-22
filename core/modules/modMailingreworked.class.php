@@ -59,7 +59,7 @@ class modMailingreworked extends DolibarrModules
 		//$this->familyinfo = array('myownfamily' => array('position' => '01', 'label' => $langs->trans("MyOwnFamily")));
 
 		// Module label (no space allowed), used if translation string 'ModuleMailingreworkedName' not found (Mailingreworked is name of module).
-		$this->name = "ModuleMailingreworkedName";
+		$this->name = preg_replace('/^mod/i', '', get_class($this));
 		// Module description, used if translation string 'ModuleMailingreworkedDesc' not found (Mailingreworked is name of module).
 		$this->description = "Refonte du module d'emailing de Dolibarr";
 		// Used only if file README.md and README-LL.md not found.
