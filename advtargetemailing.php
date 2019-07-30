@@ -26,10 +26,10 @@ if (! defined('NOSTYLECHECK')) define('NOSTYLECHECK','1');
 
 require '../../main.inc.php';
 
-require_once DOL_DOCUMENT_ROOT . '/comm/mailing/class/mailing.class.php';
+require_once DOL_DOCUMENT_ROOT . '/custom/mailingreworked/class/mailing.class.php';
 require_once DOL_DOCUMENT_ROOT . '/core/lib/emailing.lib.php';
-require_once DOL_DOCUMENT_ROOT . '/comm/mailing/class/advtargetemailing.class.php';
-require_once DOL_DOCUMENT_ROOT . '/comm/mailing/class/html.formadvtargetemailing.class.php';
+require_once DOL_DOCUMENT_ROOT . '/custom/mailingreworked/class/advtargetemailing.class.php';
+require_once DOL_DOCUMENT_ROOT . '/custom/mailingreworked/class/html.formadvtargetemailing.class.php';
 require_once DOL_DOCUMENT_ROOT . '/core/modules/mailings/advthirdparties.modules.php';
 require_once DOL_DOCUMENT_ROOT . '/core/class/html.formcompany.class.php';
 require_once DOL_DOCUMENT_ROOT . '/core/class/html.formother.class.php';
