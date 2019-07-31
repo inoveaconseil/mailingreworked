@@ -43,6 +43,7 @@ if (! $sortorder) $sortorder="DESC";
 if (! $sortfield) $sortfield="m.date_creat";
 
 $search_all=trim((GETPOST('search_all', 'alphanohtml')!='')?GETPOST('search_all', 'alphanohtml'):GETPOST('sall', 'alphanohtml'));
+$search_sujet=trim((GETPOST('search_sujet', 'alphanohtml')!='')?GETPOST('search_sujet', 'alphanohtml'):GETPOST('ssujet', 'alphanohtml'));
 $search_ref=GETPOST("search_ref", "alpha") ? GETPOST("search_ref", "alpha") : GETPOST("sref", "alpha");
 $filteremail=GETPOST('filteremail','alpha');
 
@@ -119,13 +120,13 @@ $form = new Form($db);
 
 if ($filteremail)
 {
-	$sql = "SELECT m.rowid, m.titre, m.nbemail, m.statut, m.date_creat as datec, m.date_envoi as date_envoi,";
+	$sql = "SELECT m.rowid, m.titre, m.sujet, m.nbemail, m.statut, m.date_creat as datec, m.date_envoi as date_envoi,";
 	$sql.= " mc.statut as sendstatut";
 	$sql.= " FROM ".MAIN_DB_PREFIX."mailing as m, ".MAIN_DB_PREFIX."mailing_cibles as mc";
 	$sql.= " WHERE m.rowid = mc.fk_mailing AND m.entity = ".$conf->entity;
 	$sql.= " AND mc.email = '".$db->escape($filteremail)."'";
-	if ($search_ref) $sql.= " AND m.rowid = '".$db->escape($search_ref)."'";
 	if ($search_all) $sql.= " AND (m.titre like '%".$db->escape($search_all)."%' OR m.sujet like '%".$db->escape($search_all)."%' OR m.body like '%".$db->escape($search_all)."%')";
+	if ($search_sujet) $sql.= " AND m.sujet like '%".$db->escape($search_sujet)."'";
 	if (! $sortorder) $sortorder="ASC";
 	if (! $sortfield) $sortfield="m.rowid";
 	$sql.= $db->order($sortfield,$sortorder);
@@ -133,13 +134,14 @@ if ($filteremail)
 }
 else
 {
-	$sql = "SELECT m.rowid, m.titre, m.nbemail, m.statut, m.date_creat as datec, m.date_envoi as date_envoi";
+	$sql = "SELECT m.rowid, m.titre, m.sujet, m.nbemail, m.statut, m.date_creat as datec, m.date_envoi as date_envoi";
 	$sql.= " FROM ".MAIN_DB_PREFIX."mailing as m";
 	$sql.= " WHERE m.entity = ".$conf->entity;
-	if ($search_ref) $sql.= " AND m.rowid = '".$db->escape($search_ref)."'";
 	if ($search_all) $sql.= " AND (m.titre like '%".$db->escape($search_all)."%' OR m.sujet like '%".$db->escape($search_all)."%' OR m.body like '%".$db->escape($search_all)."%')";
+    if ($search_sujet) $sql.= " AND m.sujet like '%".$db->escape($search_sujet)."'";
 	if (! $sortorder) $sortorder="ASC";
 	if (! $sortfield) $sortfield="m.rowid";
+
 	$sql.= $db->order($sortfield,$sortorder);
 	$sql.= $db->plimit($conf->liste_limit +1, $offset);
 }
@@ -156,9 +158,9 @@ if ($result)
 	$newcardbutton='';
 	if ($user->rights->mailing->creer)
 	{
-		$newcardbutton='<a class="butActionNew" href="'.DOL_URL_ROOT.'/comm/mailing/card.php?action=create"><span class="valignmiddle">'.$langs->trans('NewMailing').'</span>';
-		$newcardbutton.= '<span class="fa fa-plus-circle valignmiddle"></span>';
-		$newcardbutton.= '</a>';
+		$newcardbutton='<div><a class="butActionNew button" style="color: #ffffff; padding: 12px 0px 12px 12px;"" href="'.DOL_URL_ROOT. '/custom/mailingreworked/card.php?action=create"><span class="valignmiddle" style="float:left;display:block;color:#FFF;" >' .$langs->trans('NewMailing').'</span>';
+		$newcardbutton.= '<span class="fa fa-plus valignmiddle" style="color:#FFF;margin-left: 5px; margin-right: 10px"></span>';
+		$newcardbutton.= '</a></div>';
 	}
 
 	$i = 0;
@@ -183,15 +185,16 @@ if ($result)
 
 	print '<tr class="liste_titre_filter">';
 	print '<td class="liste_titre">';
-	print '<input type="text" class="flat maxwidth50" name="search_ref" value="'.dol_escape_htmltag($search_ref).'">';
+	print '<input type="text" class="flat maxwidth50" name="search_all" value="'.dol_escape_htmltag($search_all).'">';
 	print '</td>';
 	// Title
 	print '<td class="liste_titre">';
-	print '<input type="text" class="flat maxwidth100 maxwidth50onsmartphone" name="search_all" value="'.dol_escape_htmltag($search_all).'">';
+	print '<input type="text" class="flat maxwidth100 maxwidth50onsmartphone" name="search_sujet" value="'.dol_escape_htmltag($search_sujet).'">';
 	print '</td>';
 	print '<td class="liste_titre">&nbsp;</td>';
 	if (! $filteremail) print '<td class="liste_titre">&nbsp;</td>';
 	print '<td class="liste_titre">&nbsp;</td>';
+	//print '<td class="liste_titre">&nbsp;</td>';
 	print '<td class="liste_titre">&nbsp;</td>';
 	print '<td class="liste_titre" align="right">';
 	$searchpicto=$form->showFilterAndCheckAddButtons(0);
@@ -200,8 +203,9 @@ if ($result)
 	print "</tr>\n";
 
 	print '<tr class="liste_titre">';
-	print_liste_field_titre("Ref",$_SERVER["PHP_SELF"],"m.rowid",$param,"","",$sortfield,$sortorder);
-	print_liste_field_titre("Title",$_SERVER["PHP_SELF"],"m.titre",$param,"","",$sortfield,$sortorder);
+	//print_liste_field_titre("Ref",$_SERVER["PHP_SELF"],"m.rowid",$param,"","",$sortfield,$sortorder);
+	print_liste_field_titre("Category",$_SERVER["PHP_SELF"],"m.titre",$param,"","",$sortfield,$sortorder);
+	print_liste_field_titre("Objet",$_SERVER["PHP_SELF"],"m.sujet",$param,"","",$sortfield,$sortorder);
 	print_liste_field_titre("DateCreation",$_SERVER["PHP_SELF"],"m.date_creat",$param,"",'align="center"',$sortfield,$sortorder);
 	if (! $filteremail) print_liste_field_titre("NbOfEMails",$_SERVER["PHP_SELF"],"m.nbemail",$param,"",'align="center"',$sortfield,$sortorder);
 	if (! $filteremail) print_liste_field_titre("DateLastSend",$_SERVER["PHP_SELF"],"m.date_envoi",$param,"",'align="center"',$sortfield,$sortorder);
@@ -223,10 +227,12 @@ if ($result)
 		print "<tr>";
 
 		print '<td>';
-		print $email->getNomUrl(1);
+		print $email->getNomUrl(1, $obj->titre);
 		print '</td>';
 
-		print '<td>'.$obj->titre.'</td>';
+		//sujet
+		print '<td>'.$obj->sujet.'</td>';
+
 		// Date creation
 
 		print '<td align="center">';

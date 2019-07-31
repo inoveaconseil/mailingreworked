@@ -79,7 +79,7 @@ llxHeader("",$langs->trans("MailingreworkedArea"));
 print load_fiche_titre($langs->trans("MailingreworkedArea"),'','mailingreworked.png@mailingreworked');
 
 print '<div class="fichecenter"><div class="fichethirdleft">';
-
+print '<a href="./list.php">liste</a>';
 
 /* BEGIN MODULEBUILDER DRAFT MYOBJECT
 // Draft MyObject

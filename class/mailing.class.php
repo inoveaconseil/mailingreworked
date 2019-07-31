@@ -537,7 +537,7 @@ class Mailing extends CommonObject
 	 *  @param  int     $save_lastsearch_value    	-1=Auto, 0=No save of lastsearch_values when clicking, 1=Save lastsearch_values whenclicking
 	 *	@return	string								String with URL
 	 */
-	function getNomUrl($withpicto=0, $option='', $notooltip=0, $morecss='', $save_lastsearch_value=-1)
+	function getNomUrl($withpicto=0, $titre, $option='', $notooltip=0, $morecss='', $save_lastsearch_value=-1)
 	{
 		global $db, $conf, $langs, $hookmanager;
 		global $dolibarr_main_authentication, $dolibarr_main_demo;
@@ -548,11 +548,11 @@ class Mailing extends CommonObject
 		$result = '';
 		$companylink = '';
 
-		$label = '<u>' . $langs->trans("ShowEmailing") . '</u>';
-		$label.= '<br>';
-		$label.= '<b>' . $langs->trans('Ref') . ':</b> ' . $this->ref;
+		//$label = '<u>' . $langs->trans("ShowEmailing") . '</u>';
+		//$label.= '<br>';
+		$label= '<b>' . $langs->trans('Ref') . ':</b> ' . $this->id;
 
-		$url = DOL_URL_ROOT.'/comm/mailing/card.php?id='.$this->id;
+		$url = DOL_URL_ROOT.'/custom/mailingreworked/card.php?id='.$this->id;
 
 		if ($option != 'nolink')
 		{
@@ -588,7 +588,7 @@ class Mailing extends CommonObject
 
 		$result .= $linkstart;
 		if ($withpicto) $result.=img_object(($notooltip?'':$label), ($this->picto?$this->picto:'generic'), ($notooltip?(($withpicto != 2) ? 'class="paddingright"' : ''):'class="'.(($withpicto != 2) ? 'paddingright ' : '').'classfortooltip"'), 0, 0, $notooltip?0:1);
-		if ($withpicto != 2) $result.= $this->ref;
+		if ($withpicto != 2) $result.= $titre;
 		$result .= $linkend;
 		//if ($withpicto != 2) $result.=(($addlabel && $this->label) ? $sep . dol_trunc($this->label, ($addlabel > 1 ? $addlabel : 0)) : '');
 

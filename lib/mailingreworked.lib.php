@@ -70,14 +70,14 @@ function emailing_prepare_head(Mailing $object)
     $h = 0;
     $head = array();
 
-    $head[$h][0] = DOL_URL_ROOT."/comm/mailing/card.php?id=".$object->id;
+    $head[$h][0] = DOL_URL_ROOT."/custom/mailingreworked/card.php?id=".$object->id;
     $head[$h][1] = $langs->trans("MailCard");
     $head[$h][2] = 'card';
     $h++;
 
     if (empty($conf->global->MAIN_USE_ADVANCED_PERMS) || (! empty($conf->global->MAIN_USE_ADVANCED_PERMS) && $user->rights->mailing->mailing_advance->recipient))
     {
-        $head[$h][0] = DOL_URL_ROOT."/comm/mailing/cibles.php?id=".$object->id;
+        $head[$h][0] = DOL_URL_ROOT."/custom/mailingreworked/cibles.php?id=".$object->id;
         $head[$h][1] = $langs->trans("MailRecipients");
         if ($object->nbemail > 0) $head[$h][1].= ' <span class="badge">'.$object->nbemail.'</span>';
         $head[$h][2] = 'targets';
@@ -86,13 +86,13 @@ function emailing_prepare_head(Mailing $object)
 
     if (! empty($conf->global->EMAILING_USE_ADVANCED_SELECTOR))
     {
-        $head[$h][0] = DOL_URL_ROOT."/comm/mailing/advtargetemailing.php?id=".$object->id;
+        $head[$h][0] = DOL_URL_ROOT."/custom/mailingreworked/advtargetemailing.php?id=".$object->id;
         $head[$h][1] = $langs->trans("MailAdvTargetRecipients");
         $head[$h][2] = 'advtargets';
         $h++;
     }
 
-    $head[$h][0] = DOL_URL_ROOT."/comm/mailing/info.php?id=".$object->id;
+    $head[$h][0] = DOL_URL_ROOT."/custom/mailingreworked/info.php?id=".$object->id;
     $head[$h][1] = $langs->trans("Info");
     $head[$h][2] = 'info';
     $h++;

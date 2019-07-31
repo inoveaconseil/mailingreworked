@@ -29,7 +29,7 @@ require_once DOL_DOCUMENT_ROOT.'/custom/mailingreworked/core/modules/modules_mai
 require_once DOL_DOCUMENT_ROOT.'/custom/mailingreworked/class/mailing.class.php';
 require_once DOL_DOCUMENT_ROOT.'/custom/mailingreworked/class/html.formmailing.class.php';
 require_once DOL_DOCUMENT_ROOT.'/custom/mailingreworked/lib/emailing.lib.php';
-require_once DOL_DOCUMENT_ROOT.'/custom/mailingreworked/class/CMailFile.class.php';
+require_once DOL_DOCUMENT_ROOT.'/custom/mailingreworked/    class/CMailFile.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
 
 // Load translation files required by the page
