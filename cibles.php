@@ -28,8 +28,8 @@ require '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/custom/mailingreworked/core/modules/modules_mailings.php';
 require_once DOL_DOCUMENT_ROOT.'/custom/mailingreworked/class/mailing.class.php';
 require_once DOL_DOCUMENT_ROOT.'/custom/mailingreworked/class/html.formmailing.class.php';
-require_once DOL_DOCUMENT_ROOT.'/custom/mailingreworked/lib/emailing.lib.php';
-require_once DOL_DOCUMENT_ROOT.'/custom/mailingreworked/    class/CMailFile.class.php';
+require_once DOL_DOCUMENT_ROOT.'/custom/mailingreworked/lib/mailingreworked.lib.php';
+require_once DOL_DOCUMENT_ROOT.'/custom/mailingreworked/class/CMailFile.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
 
 // Load translation files required by the page
@@ -63,7 +63,7 @@ $search_dest_status=GETPOST('search_dest_status');
 // Search modules dirs
 $modulesdir = dolGetModulesDirs('/mailings');
 
-$object = new Mailing($db);
+$object = new FBMailing($db);
 
 
 /*
@@ -119,7 +119,7 @@ if ($action == 'add')
 if (GETPOST('clearlist'))
 {
 	// Loading Class
-	$obj = new MailingTargets($db);
+	$obj = new FBMailingTargets($db);
 	$obj->clear_target($id);
 	/* Avoid this to allow reposition
 	header("Location: ".$_SERVER['PHP_SELF']."?id=".$id);
@@ -136,7 +136,7 @@ if ($action == 'delete')
 	{
 		if (!empty($id))
 		{
-			$obj = new MailingTargets($db);
+			$obj = new FBMailingTargets($db);
 			$obj->update_nb($id);
 
 			header("Location: ".$_SERVER['PHP_SELF']."?id=".$id);
@@ -177,11 +177,11 @@ $formmailing = new FormMailing($db);
 
 if ($object->fetch($id) >= 0)
 {
-	$head = emailing_prepare_head($object);
+	$head = fb_emailing_prepare_head($object);
 
 	dol_fiche_head($head, 'targets', $langs->trans("Mailing"), -1, 'email');
 
-	$linkback = '<a href="'.DOL_URL_ROOT.'/comm/mailing/list.php">'.$langs->trans("BackToList").'</a>';
+	$linkback = '<a href="'.DOL_URL_ROOT.'/custom/mailingreworked/list.php">'.$langs->trans("BackToList").'</a>';
 
 	$morehtmlright='';
 	$nbtry = $nbok = 0;

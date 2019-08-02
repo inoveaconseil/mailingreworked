@@ -47,7 +47,7 @@ $search_sujet=trim((GETPOST('search_sujet', 'alphanohtml')!='')?GETPOST('search_
 $search_ref=GETPOST("search_ref", "alpha") ? GETPOST("search_ref", "alpha") : GETPOST("sref", "alpha");
 $filteremail=GETPOST('filteremail','alpha');
 
-$object = new Mailing($db);
+$object = new FBMailing($db);
 
 // Initialize technical object to manage hooks of page. Note that conf->hooks_modules contains array of hook context
 $hookmanager->initHooks(array('mailinglist'));
@@ -204,8 +204,8 @@ if ($result)
 
 	print '<tr class="liste_titre">';
 	//print_liste_field_titre("Ref",$_SERVER["PHP_SELF"],"m.rowid",$param,"","",$sortfield,$sortorder);
-	print_liste_field_titre("Category",$_SERVER["PHP_SELF"],"m.titre",$param,"","",$sortfield,$sortorder);
 	print_liste_field_titre("Objet",$_SERVER["PHP_SELF"],"m.sujet",$param,"","",$sortfield,$sortorder);
+	print_liste_field_titre("Category",$_SERVER["PHP_SELF"],"m.titre",$param,"","",$sortfield,$sortorder); //titre
 	print_liste_field_titre("DateCreation",$_SERVER["PHP_SELF"],"m.date_creat",$param,"",'align="center"',$sortfield,$sortorder);
 	if (! $filteremail) print_liste_field_titre("NbOfEMails",$_SERVER["PHP_SELF"],"m.nbemail",$param,"",'align="center"',$sortfield,$sortorder);
 	if (! $filteremail) print_liste_field_titre("DateLastSend",$_SERVER["PHP_SELF"],"m.date_envoi",$param,"",'align="center"',$sortfield,$sortorder);
@@ -215,7 +215,7 @@ if ($result)
 	print "</tr>\n";
 
 
-	$email=new Mailing($db);
+	$email=new FBMailing($db);
 
 	while ($i < min($num,$limit))
 	{
@@ -226,12 +226,16 @@ if ($result)
 
 		print "<tr>";
 
-		print '<td>';
-		print $email->getNomUrl(1, $obj->titre);
-		print '</td>';
 
 		//sujet
-		print '<td>'.$obj->sujet.'</td>';
+		print '<td>'.$email->getNomUrl(1, $obj->sujet).'</td>';
+
+		//titre
+		print '<td>';
+		print $email->getNomUrl(0, $obj->titre);
+		print '</td>';
+
+
 
 		// Date creation
 

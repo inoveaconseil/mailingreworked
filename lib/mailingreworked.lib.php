@@ -63,7 +63,7 @@ function mailingreworkedAdminPrepareHead()
  * @param   Mailing	$object		Object related to tabs
  * @return  array				Array of tabs to show
  */
-function emailing_prepare_head(Mailing $object)
+function fb_emailing_prepare_head(FBMailing $object)
 {
     global $user, $langs, $conf;
 

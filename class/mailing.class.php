@@ -29,7 +29,7 @@ require_once DOL_DOCUMENT_ROOT .'/core/class/commonobject.class.php';
 /**
  *	Class to manage emailings module
  */
-class Mailing extends CommonObject
+class FBMailing extends CommonObject
 {
 	/**
 	 * @var string ID to identify managed object

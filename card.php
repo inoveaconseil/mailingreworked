@@ -45,7 +45,7 @@ $action = GETPOST('action', 'alpha');
 $confirm = GETPOST('confirm', 'alpha');
 $urlfrom = GETPOST('urlfrom');
 
-$object = new Mailing($db);
+$object = new FBMailing($db);
 $result = $object->fetch($id);
 
 $extrafields = new ExtraFields($db);
@@ -431,15 +431,21 @@ if (empty($reshook)) {
     // Action add emailing
     if ($action == 'add') {
         $mesgs = array();
-
         $object->email_from = trim($_POST["from"]);
         $object->email_replyto = trim($_POST["replyto"]);
         $object->email_errorsto = trim($_POST["errorsto"]);
         $object->titre = trim($_POST["titre"]);
         $object->sujet = trim($_POST["sujet"]);
         $object->body = trim($_POST["bodyemail"]);
+        if (($_POST["checkread"]) == "on"){
+        	$object->body .= "\n\r __CHECK_READ__";
+		}
+		if (($_POST["unsubscribeLink"]) == "on"){
+			$object->body .= "\n\r __UNSUBSCRIBE__";
+		}
         $object->bgcolor = trim($_POST["bgcolor"]);
         $object->bgimage = trim($_POST["bgimage"]);
+
 
         if (!$object->titre) {
             //$mesgs[] = $langs->trans("ErrorFieldRequired",$langs->transnoentities("MailTitle"));
@@ -640,7 +646,7 @@ if ($action == 'create') {
     print '<script type="text/javascript">
            $(document).ready(function(){
 
-        $(\'input[type="checkbox"]\').click(function(){
+        $(\'input[type="checkbox"][id="errorstosender"]\').click(function(){
            
                      if($(this).prop("checked") == true){
                          $(\'tr[id="error"]\').hide();
@@ -650,13 +656,16 @@ if ($action == 'create') {
             else if($(this).prop("checked") == false){
                 $(\'tr[id="error"]\').show()
             }
-
         });
-
+                
+                $(\'select[id="modele"]\').change(function() {
+                
+                  	 $(\'input[name="titre"]\').val($(\'select[id="modele"]\').val())
+					
+                })
+                
+                
     });
-        
-
-
 </script>';
 
     $htmltext = '<i>' . $langs->trans("FollowingConstantsWillBeSubstituted") . ':<br>';
@@ -677,6 +686,12 @@ if ($action == 'create') {
 
     print '<table class="border" width="100%">';
     print '<tr><td class="titlefieldcreate">' . $langs->trans("Category") . '</td><td><input class="flat minwidth300" name="titre" value="' . dol_escape_htmltag(GETPOST('titre')) . '" autofocus="autofocus"></td></tr>';
+	print '<tr><td>Modèle</td><td><select id="modele">
+				<option>Liste de tout les modèles</option>
+				<option>Enregistrés en base</option>
+				<option>Il faut donc créer une table</option>
+				<option>Ou alors regarder comment sont déja géré les modèles</option>
+			</select></td></tr>';
     print '<tr><td class="fieldrequired">' . $langs->trans("MailFrom") . ' <strong style="color: red" >*</strong></td><td><input class="flat minwidth200" name="from" value="' . $conf->global->MAILING_EMAIL_FROM . '">&nbsp; <input type="checkbox" id="errorstosender"  > <label for="errorstosender"> Erreurs vers l\'émetteur</label></td></tr>';
     print '<tr id="error"><td>' . $langs->trans("MailErrorsTo") . '</td><td><input class="flat minwidth200" name="errorsto" value="' . (!empty($conf->global->MAILING_EMAIL_ERRORSTO) ? $conf->global->MAILING_EMAIL_ERRORSTO : $conf->global->MAIN_MAIL_ERRORS_TO) . '"></td></tr>';
 
@@ -700,6 +715,8 @@ if ($action == 'create') {
     $doleditor = new DolEditor('bodyemail', GETPOST('bodyemail', 'none'), '', 600, 'dolibarr_mailings', '', true, true, $conf->global->FCKEDITOR_ENABLE_MAILING, 20, '90%');
     $doleditor->Create();
     print '</div>';
+    print '<input type="checkbox" name="checkread" id="checkread"><label for="checkread">Suivre l\'ouverture de l\'email</label> <br> ';
+    print '<input type="checkbox" name="unsubscribeLink" id="unsubscribeLink"><label for="unsubscribeLink">Lien de désinscription</label> <br> ';
 
     dol_fiche_end();
 
@@ -710,7 +727,7 @@ if ($action == 'create') {
     if ($object->id > 0) {
         $upload_dir = $conf->mailing->dir_output . "/" . get_exdir($object->id, 2, 0, 1, $object, 'mailing');
 
-        $head = emailing_prepare_head($object);
+        $head = fb_emailing_prepare_head($object);
 
         // Confirmation back to draft
         if ($action == 'settodraft') {
@@ -780,7 +797,7 @@ if ($action == 'create') {
                 }
             }
 
-            $linkback = '<a href="' . DOL_URL_ROOT . '/comm/mailing/list.php?restore_lastsearch_values=1">' . $langs->trans("BackToList") . '</a>';
+            $linkback = '<a href="' . DOL_URL_ROOT . '/custom/mailingreworked/list.php?restore_lastsearch_values=1">' . $langs->trans("BackToList") . '</a>';
 
             $morehtmlright = '';
             $nbtry = $nbok = 0;
@@ -873,12 +890,12 @@ if ($action == 'create') {
 
                 if (($object->statut == 0 || $object->statut == 1) && $user->rights->mailing->creer) {
                     if (!empty($conf->fckeditor->enabled) && !empty($conf->global->FCKEDITOR_ENABLE_MAILING)) {
-                        print '<a class="butAction" href="' . $_SERVER['PHP_SELF'] . '?action=edit&amp;id=' . $object->id . '">' . $langs->trans("EditWithEditor") . '</a>';
+                        print '<a class="butAction" href="' . $_SERVER['PHP_SELF'] . '?action=edit&amp;id=' . $object->id . '">' . $langs->trans("Edit") . '</a>';
                     } else {
                         print '<a class="butAction" href="' . $_SERVER['PHP_SELF'] . '?action=edit&amp;id=' . $object->id . '">' . $langs->trans("EditWithTextEditor") . '</a>';
                     }
 
-                    if (!empty($conf->use_javascript_ajax)) print '<a class="butAction" href="' . $_SERVER['PHP_SELF'] . '?action=edithtml&amp;id=' . $object->id . '">' . $langs->trans("EditHTMLSource") . '</a>';
+                    //if (!empty($conf->use_javascript_ajax)) print '<a class="butAction" href="' . $_SERVER['PHP_SELF'] . '?action=edithtml&amp;id=' . $object->id . '">' . $langs->trans("EditHTMLSource") . '</a>';
                 }
 
                 //print '<a class="butAction" href="card.php?action=test&amp;id='.$object->id.'">'.$langs->trans("PreviewMailing").'</a>';
@@ -1031,7 +1048,7 @@ if ($action == 'create') {
 
             dol_fiche_head($head, 'card', $langs->trans("Mailing"), -1, 'email');
 
-            $linkback = '<a href="' . DOL_URL_ROOT . '/comm/mailing/list.php">' . $langs->trans("BackToList") . '</a>';
+            $linkback = '<a href="' . DOL_URL_ROOT . '/custom/mailingreworked/list.php">' . $langs->trans("BackToList") . '</a>';
 
             $morehtmlright = '';
             if ($object->statut == 2) $morehtmlright .= ' (' . $object->countNbOfTargets('alreadysent') . '/' . $object->nbemail . ') ';

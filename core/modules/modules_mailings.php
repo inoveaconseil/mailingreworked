@@ -29,7 +29,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/functions.lib.php';
 /**
  *		Parent class of emailing target selectors modules
  */
-class MailingTargets // This can't be abstract as it is used for some method
+class FBMailingTargets // This can't be abstract as it is used for some method
 {
     /**
      * @var DoliDB Database handler.
