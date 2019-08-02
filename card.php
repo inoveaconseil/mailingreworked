@@ -1171,9 +1171,9 @@ if ($action == 'create') {
             print '</td></tr>';
 
             // Background color
-            print '<tr><td>' . $langs->trans("BackgroundColorByDefault") . '</td><td colspan="3">';
-            print $htmlother->selectColor($object->bgcolor, 'bgcolor', '', 0);
-            print '</td></tr>';
+            //print '<tr><td>' . $langs->trans("BackgroundColorByDefault") . '</td><td colspan="3">';
+            //print $htmlother->selectColor($object->bgcolor, 'bgcolor', '', 0);
+            //	print '</td></tr>';
 
             print '</table>';
 
