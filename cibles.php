@@ -175,6 +175,38 @@ llxHeader('',$langs->trans("Mailing"),'EN:Module_EMailing|FR:Module_Mailing|ES:M
 $form = new Form($db);
 $formmailing = new FormMailing($db);
 
+print "<script type='application/javascript'>
+			
+$(document).ready(function () {
+    $(\"#destinataire\").click(function () {
+    		
+    		$('.destinataire').toggle('fast');
+    		group = $(this).children(\"i\").attr('id');
+    		$('#'+group).toggleClass('fa-chevron-down');
+    		$('#'+group).toggleClass('fa-chevron-right');
+    		$('#destinataire').toggleClass('roleSelected');
+    		$('#destinataire').toggleClass('role');
+    
+    	});
+    		
+    		
+    		$(\"#filter\").click(function () {
+    		
+    		$('.filter') . toggle('slow');
+    		group = $(this) . children(\"i\").attr('id');
+    		$('#' + group) . toggleClass('fa-chevron-down');
+    		$('#' + group) . toggleClass('fa-chevron-right');
+    		$('#filter') . toggleClass('roleSelected');
+    		$('#filter') . toggleClass('role');
+    
+    	});
+    });
+       
+
+	  </script>";
+
+
+
 if ($object->fetch($id) >= 0)
 {
 	$head = fb_emailing_prepare_head($object);
@@ -255,8 +287,14 @@ if ($object->fetch($id) >= 0)
 	// Show email selectors
 	if ($allowaddtarget && $user->rights->mailing->creer)
 	{
-		print load_fiche_titre($langs->trans("ToAddRecipientsChooseHere"), ($user->admin?info_admin($langs->trans("YouCanAddYourOwnPredefindedListHere"),1):''), 'title_generic');
+		//print load_fiche_titre($langs->trans("ToAddRecipientsChooseHere"), ($user->admin?info_admin($langs->trans("YouCanAddYourOwnPredefindedListHere"),1):''), 'title_generic');
 
+		print '<table style="width: 100% "><tr><td colspan="2" class="role clickgroup" id="filter">';
+		print '<span class="roleTitle ">' . $langs->trans('Filter') . '</span>';
+		print '<i class="fa fa-chevron-right pictoFa" style="font-size: 0.86em" id="filtergroup"></i>';
+		print '</td></tr></table><br/>';
+
+		print '<div class="filter" style="display: none">';
 		//print '<table class="noborder" width="100%">';
 		print '<div class="tagtable centpercent liste_titre_bydiv borderbottom" id="tablelines">';
 
@@ -401,11 +439,18 @@ if ($object->fetch($id) >= 0)
 			}
 		}	// End foreach dir
 
-		print '</div>';
+		print '</div></div>';
 
-		print '<br><br>';
+		print '<br>';
 	}
 
+	print '<table style="width: 100% "><tr><td colspan="2" class="role clickgroup" id="destinataire">';
+	print '<span class="roleTitle ">' . $langs->trans('Destinataire') . '</span>';
+	print '<i class="fa fa-chevron-right pictoFa" style="font-size: 0.86em" id="destinatairegroup"></i>';
+	print '</td></tr></table><br/>';
+
+	print '<div class="destinataire" style="display: none">';
+	print '<div class="destinataire" style="display: none">';
 	// List of selected targets
 	$sql  = "SELECT mc.rowid, mc.lastname, mc.firstname, mc.email, mc.other, mc.statut, mc.date_envoi, mc.source_url, mc.source_id, mc.source_type, mc.error_text";
 	$sql .= " FROM ".MAIN_DB_PREFIX."mailing_cibles as mc";
@@ -636,6 +681,7 @@ if ($object->fetch($id) >= 0)
 		print '</div>';
 
 		print '</form>';
+		print '</div>';
 
 		$db->free($resql);
 	}
