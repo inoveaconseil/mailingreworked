@@ -70,11 +70,6 @@ function fb_emailing_prepare_head(FBMailing $object)
     $h = 0;
     $head = array();
 
-    $head[$h][0] = DOL_URL_ROOT."/custom/mailingreworked/card.php?id=".$object->id;
-    $head[$h][1] = $langs->trans("MailCard");
-    $head[$h][2] = 'card';
-    $h++;
-
     if (empty($conf->global->MAIN_USE_ADVANCED_PERMS) || (! empty($conf->global->MAIN_USE_ADVANCED_PERMS) && $user->rights->mailing->mailing_advance->recipient))
     {
         $head[$h][0] = DOL_URL_ROOT."/custom/mailingreworked/cibles.php?id=".$object->id;
@@ -92,12 +87,18 @@ function fb_emailing_prepare_head(FBMailing $object)
         $h++;
     }
 
-    $head[$h][0] = DOL_URL_ROOT."/custom/mailingreworked/info.php?id=".$object->id;
-    $head[$h][1] = $langs->trans("Info");
-    $head[$h][2] = 'info';
+    $head[$h][0] = DOL_URL_ROOT."/custom/mailingreworked/card.php?id=".$object->id."&action=visu";
+    $head[$h][1] = $langs->trans("Visualization");
+    $head[$h][2] = 'visu';
     $h++;
 
-    complete_head_from_modules($conf,$langs,$object,$head,$h,'emailing');
+	$head[$h][0] = DOL_URL_ROOT."/custom/mailingreworked/card.php?id=".$object->id;
+	$head[$h][1] = $langs->trans("Edit");
+	$head[$h][2] = 'card';
+	$h++;
+
+
+	complete_head_from_modules($conf,$langs,$object,$head,$h,'emailing');
 
     complete_head_from_modules($conf,$langs,$object,$head,$h,'emailing','remove');
 
