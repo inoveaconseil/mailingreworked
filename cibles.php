@@ -174,9 +174,9 @@ llxHeader('',$langs->trans("Mailing"),'EN:Module_EMailing|FR:Module_Mailing|ES:M
 
 $form = new Form($db);
 $formmailing = new FormMailing($db);
-
+/*
 print "<script type='application/javascript'>
-			
+
 $(document).ready(function () {
     $(\"#destinataire\").click(function () {
     		
@@ -205,7 +205,7 @@ $(document).ready(function () {
 
 	  </script>";
 
-
+*/
 
 if ($object->fetch($id) >= 0)
 {
@@ -228,7 +228,8 @@ if ($object->fetch($id) >= 0)
 	}
 
 	dol_banner_tab($object, 'id', $linkback, 1, 'rowid', 'ref', '', '', 0, '', $morehtmlright);
-
+	print '<div class="refid" style="margin-left: 8%;margin-bottom: 2%;margin-top: -3%;">'.$object->sujet.'</div>';
+	print '<a class="buttonStatic" style="color:#FFFFFF; margin-bottom: 1%; margin-top: -2%" href="'.DOL_URL_ROOT.'/custom/mailingreworked/card.php?id='.$object->id.'&action=visu">'.$langs->trans("VisualizationMail").'</a>';
 	print '<div class="fichecenter">';
 	print '<div class="underbanner clearboth"></div>';
 
@@ -289,12 +290,12 @@ if ($object->fetch($id) >= 0)
 	{
 		//print load_fiche_titre($langs->trans("ToAddRecipientsChooseHere"), ($user->admin?info_admin($langs->trans("YouCanAddYourOwnPredefindedListHere"),1):''), 'title_generic');
 
-		print '<table style="width: 100% "><tr><td colspan="2" class="role clickgroup" id="filter">';
+		/*print '<table style="width: 100% "><tr><td colspan="2" class="role clickgroup" id="filter">';
 		print '<span class="roleTitle ">' . $langs->trans('Filter') . '</span>';
 		print '<i class="fa fa-chevron-right pictoFa" style="font-size: 0.86em" id="filtergroup"></i>';
 		print '</td></tr></table><br/>';
 
-		print '<div class="filter" style="display: none">';
+		print '<div class="filter" style="display: none">';*/
 		//print '<table class="noborder" width="100%">';
 		print '<div class="tagtable centpercent liste_titre_bydiv borderbottom" id="tablelines">';
 
@@ -443,14 +444,14 @@ if ($object->fetch($id) >= 0)
 
 		print '<br>';
 	}
-
+/*
 	print '<table style="width: 100% "><tr><td colspan="2" class="role clickgroup" id="destinataire">';
 	print '<span class="roleTitle ">' . $langs->trans('Destinataire') . '</span>';
 	print '<i class="fa fa-chevron-right pictoFa" style="font-size: 0.86em" id="destinatairegroup"></i>';
 	print '</td></tr></table><br/>';
 
 	print '<div class="destinataire" style="display: none">';
-	print '<div class="destinataire" style="display: none">';
+	print '<div class="destinataire" style="display: none">';*/
 	// List of selected targets
 	$sql  = "SELECT mc.rowid, mc.lastname, mc.firstname, mc.email, mc.other, mc.statut, mc.date_envoi, mc.source_url, mc.source_id, mc.source_type, mc.error_text";
 	$sql .= " FROM ".MAIN_DB_PREFIX."mailing_cibles as mc";
@@ -680,10 +681,15 @@ if ($object->fetch($id) >= 0)
 		print "</table><br>";
 		print '</div>';
 
+
+		print '<a class="button" style="color:#FFFFFF" href="'.DOL_URL_ROOT.'/custom/mailingreworked/card.php?id='.$object->id.'&action=visu">'.$langs->trans("VisualizationMail").'</a>';
+
 		print '</form>';
 		print '</div>';
 
 		$db->free($resql);
+
+
 	}
 	else
 	{

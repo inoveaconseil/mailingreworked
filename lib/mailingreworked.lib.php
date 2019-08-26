@@ -65,42 +65,92 @@ function mailingreworkedAdminPrepareHead()
  */
 function fb_emailing_prepare_head(FBMailing $object)
 {
-    global $user, $langs, $conf;
+	global $user, $langs, $conf;
 
-    $h = 0;
-    $head = array();
-
-    if (empty($conf->global->MAIN_USE_ADVANCED_PERMS) || (! empty($conf->global->MAIN_USE_ADVANCED_PERMS) && $user->rights->mailing->mailing_advance->recipient))
-    {
-        $head[$h][0] = DOL_URL_ROOT."/custom/mailingreworked/cibles.php?id=".$object->id;
-        $head[$h][1] = $langs->trans("MailRecipients");
-        if ($object->nbemail > 0) $head[$h][1].= ' <span class="badge">'.$object->nbemail.'</span>';
-        $head[$h][2] = 'targets';
-        $h++;
-    }
-
-    if (! empty($conf->global->EMAILING_USE_ADVANCED_SELECTOR))
-    {
-        $head[$h][0] = DOL_URL_ROOT."/custom/mailingreworked/advtargetemailing.php?id=".$object->id;
-        $head[$h][1] = $langs->trans("MailAdvTargetRecipients");
-        $head[$h][2] = 'advtargets';
-        $h++;
-    }
-
-    $head[$h][0] = DOL_URL_ROOT."/custom/mailingreworked/card.php?id=".$object->id."&action=visu";
-    $head[$h][1] = $langs->trans("Visualization");
-    $head[$h][2] = 'visu';
-    $h++;
+	$h = 0;
+	$head = array();
 
 	$head[$h][0] = DOL_URL_ROOT."/custom/mailingreworked/card.php?id=".$object->id;
-	$head[$h][1] = $langs->trans("Edit");
+	$head[$h][1] = '<span class="fa-stack fa-1g"><i class="fa fa-circle-o fa-stack-2x"></i><strong class="fa-stack-1x">1</strong></span> '.$langs->trans("Edition");
 	$head[$h][2] = 'card';
 	$h++;
+
+	if (empty($conf->global->MAIN_USE_ADVANCED_PERMS) || (! empty($conf->global->MAIN_USE_ADVANCED_PERMS) && $user->rights->mailing->mailing_advance->recipient))
+	{
+		$head[$h][0] = DOL_URL_ROOT."/custom/mailingreworked/cibles.php?id=".$object->id;
+		$head[$h][1] = '<span class="fa-stack fa-1g"><i class="fa fa-circle-o fa-stack-2x"></i><strong class="fa-stack-1x">2</strong></span> '.$langs->trans("MailRecipients");
+		if ($object->nbemail > 0) $head[$h][1].= ' <span class="badge">'.$object->nbemail.'</span>';
+		$head[$h][2] = 'targets';
+		$h++;
+	}
+
+	if (! empty($conf->global->EMAILING_USE_ADVANCED_SELECTOR))
+	{
+		$head[$h][0] = DOL_URL_ROOT."/custom/mailingreworked/advtargetemailing.php?id=".$object->id;
+		$head[$h][1] = '<span class="fa-stack fa-1g"><i class="fa fa-circle-o fa-stack-2x"></i><strong class="fa-stack-1x">2</strong></span> '.$langs->trans("MailAdvTargetRecipients");
+		$head[$h][2] = 'advtargets';
+		$h++;
+	}
+
+	$head[$h][0] = DOL_URL_ROOT."/custom/mailingreworked/card.php?id=".$object->id."&action=visu";
+	$head[$h][1] = '<span class="fa-stack fa-1g"><i class="fa fa-circle-o fa-stack-2x"></i><strong class="fa-stack-1x">3</strong></span> '.$langs->trans("Visualization");
+	$head[$h][2] = 'visu';
+	$h++;
+
 
 
 	complete_head_from_modules($conf,$langs,$object,$head,$h,'emailing');
 
-    complete_head_from_modules($conf,$langs,$object,$head,$h,'emailing','remove');
+	complete_head_from_modules($conf,$langs,$object,$head,$h,'emailing','remove');
 
-    return $head;
+	return $head;
+}
+
+/**
+ * Prepare array with list of tabs (only visual)
+ *
+ * @param   Mailing	$object		Object related to tabs
+ * @return  array				Array of tabs to show
+ */
+function fb_emailing_prepare_head_inactiv(FBMailing $object)
+{
+	global $user, $langs, $conf;
+
+	$h = 0;
+	$head = array();
+
+	$head[$h][0] = 'javascript:void(0);';
+	$head[$h][1] = '<div style="pointer-events: none;cursor: default ; color: rgba(0,0,0,.5) !important"><span class="fa-stack fa-1g"><i class="fa fa-circle-o fa-stack-2x"></i><strong class="fa-stack-1x">1</strong></span> '.$langs->trans("Edition").'</div>';
+	$head[$h][2] = 'card';
+	$h++;
+
+	if (empty($conf->global->MAIN_USE_ADVANCED_PERMS) || (! empty($conf->global->MAIN_USE_ADVANCED_PERMS) && $user->rights->mailing->mailing_advance->recipient))
+	{
+		$head[$h][0] = 'javascript:void(0);';
+		$head[$h][1] = '<div style="pointer-events: none;cursor: default ; color: rgba(0,0,0,.5) !important"><span class="fa-stack fa-1g"><i class="fa fa-circle-o fa-stack-2x"></i><strong class="fa-stack-1x">2</strong></span> '.$langs->trans("MailRecipients").'</div>';
+		if ($object->nbemail > 0) $head[$h][1].= ' <span class="badge">'.$object->nbemail.'</span>';
+		$head[$h][2] = 'targets';
+		$h++;
+	}
+
+	if (! empty($conf->global->EMAILING_USE_ADVANCED_SELECTOR))
+	{
+		$head[$h][0] = 'javascript:void(0);';
+		$head[$h][1] = '<div style="pointer-events: none;cursor: default ; color: rgba(0,0,0,.5) !important"><span class="fa-stack fa-1g"><i class="fa fa-circle-o fa-stack-2x"></i><strong class="fa-stack-1x">2</strong></span> '.$langs->trans("MailAdvTargetRecipients").'</div>';
+		$head[$h][2] = 'advtargets';
+		$h++;
+	}
+
+	$head[$h][0] = 'javascript:void(0);';
+	$head[$h][1] = '<div style="pointer-events: none;cursor: default; color: rgba(0,0,0,.5) !important"><span class="fa-stack fa-1g"><i class="fa fa-circle-o fa-stack-2x"></i><strong class="fa-stack-1x">3</strong></span> '.$langs->trans("Visualization").'</div>';
+	$head[$h][2] = 'visu';
+	$h++;
+
+
+
+	complete_head_from_modules($conf,$langs,$object,$head,$h,'emailing');
+
+	complete_head_from_modules($conf,$langs,$object,$head,$h,'emailing','remove');
+
+	return $head;
 }

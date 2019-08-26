@@ -1063,7 +1063,22 @@ class FormMail extends Form
 			if ($this->withform == 1 || $this->withform == -1)
 			{
 				$out.= '<br><div class="center">';
-				$out.= '<input class="button" type="submit" id="sendmail" name="sendmail" value="'.$langs->trans("SendMail").'"';
+				$out.= '<input style="	
+	height: 30px;
+	width: 170px;
+	margin-bottom: 3px;
+	margin-top: 3px;
+	margin-left: 10px;
+	margin-right: 10px;
+	display: inline-block;
+	padding: 12px 18px 12px 18px;
+	text-align: center;
+	cursor: pointer;
+	text-decoration: none !important;
+	background-color: rgb(96, 217, 204);
+	border : none;
+	color:#FFFFFF;
+	float:right;" type="submit" id="sendmail" name="sendmail" value="'.$langs->trans("SendTest").'"';
 				// Add a javascript test to avoid to forget to submit file before sending email
 				if ($this->withfile == 2 && $conf->use_javascript_ajax)
 				{
@@ -1073,9 +1088,24 @@ class FormMail extends Form
 				if ($this->withcancel)
 				{
 					$out.= ' &nbsp; &nbsp; ';
-					$out.= '<input class="button" type="submit" id="cancel" name="cancel" value="'.$langs->trans("Cancel").'" />';
+					$out.= '<input style="	
+	height: 30px;
+	width: 185px;
+	margin-bottom: 3px;
+	margin-top: 3px;
+	margin-left: 10px;
+	margin-right: 10px;
+	display: inline-block;
+	padding: 12px 18px 12px 18px;
+	text-align: center;
+	cursor: pointer;
+	text-decoration: none !important;
+	background-color: #3699ff;
+	border : none;
+	color:#FFFFFF;
+	float:right;" type="submit" id="cancel" name="cancel" value="'.$langs->trans("Cancel").'" />';
 				}
-				$out.= '</div>'."\n";
+				$out.= '</div><br/>'."\n";
 			}
 
 			if ($this->withform == 1) $out.= '</form>'."\n";
@@ -1429,6 +1459,37 @@ class FormMail extends Form
 
 		return $tmparray;
 	}
+	function getTopic($user) {
+		$sql = "SELECT topic";
+		$sql.= " FROM ".MAIN_DB_PREFIX.'c_email_templates';
+		$sql.= " WHERE (private = 0 OR fk_user = ".$user->id.")";		// See all public templates or templates I own.
+		//if (is_object($outputlangs)) $sql.= " AND (lang = '".$outputlangs->defaultlang."' OR lang IS NULL OR lang = '')";	// Return all languages
+		//$sql.= $this->db->order("position,lang,label","ASC");
+		//print $sql;
+
+		$resql = $this->db->query($sql);
+		if ($resql)
+		{
+			$num=$this->db->num_rows($resql);
+			$this->lines_model=array();
+			while ($obj = $this->db->fetch_object($resql))
+			{
+				$line = new ModelMail();
+				$line->id=$obj->rowid;
+				$line->topic=$obj->topic;
+
+				$this->lines_model[]=$line;
+			}
+			$this->db->free($resql);
+			return $num;
+		}
+		else
+		{
+			$this->error=get_class($this).' '.__METHOD__.' ERROR:'.$this->db->lasterror();
+			return -1;
+		}
+	}
+
 }
 
 

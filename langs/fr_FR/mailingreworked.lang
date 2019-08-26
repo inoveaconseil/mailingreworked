@@ -46,5 +46,21 @@ MyPageName = Nom de ma page
 MyWidget = Mon widget
 MyWidgetDescription = Description de mon widget
 
-Visualization = Visualisation
+Visualization = Visualisation et envoi
+VisualizationMail = Visualiser l'emailing
 Edit = Editer Emailing
+EditMail = Retour à l'édition
+Send = Valider l'envoi
+Edition = Édition
+BackToCibles = Afficher la liste des destinataires
+
+ModeleName = Nom du modèle
+
+InformationLetter = Lettre d'information
+InfoAlert = Alerte Info
+SendAgain = Relance
+Invitation = Invitation
+
+BackToEditor = Editeur de texte
+ConfirmSendMailing = Confirmez-vous l'envoi de l'emailing ?
+SendTest = Envoyer test

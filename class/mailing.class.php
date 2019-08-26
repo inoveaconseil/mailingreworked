@@ -277,7 +277,7 @@ class FBMailing extends CommonObject
 
 		$error=0;
 
-		$object=new Mailing($this->db);
+		$object=new FBMailing($this->db);
 
 		$this->db->begin();
 
@@ -328,7 +328,7 @@ class FBMailing extends CommonObject
 			//Clone target
 			if (!empty($option2)) {
 
-				require_once DOL_DOCUMENT_ROOT .'/core/modules/mailings/modules_mailings.php';
+				require_once DOL_DOCUMENT_ROOT .'custom/mailingreworked/core/modules/mailings/modules_mailings.php';
 
 				$mailing_target = new MailingTargets($this->db);
 

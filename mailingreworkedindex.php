@@ -80,6 +80,7 @@ print load_fiche_titre($langs->trans("MailingreworkedArea"),'','mailingreworked.
 
 print '<div class="fichecenter"><div class="fichethirdleft">';
 print '<a href="./list.php">liste</a>';
+print '<a href="./mails_templates.php"> Templates </a>';
 
 /* BEGIN MODULEBUILDER DRAFT MYOBJECT
 // Draft MyObject

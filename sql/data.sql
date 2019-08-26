@@ -16,3 +16,19 @@
 INSERT INTO llx_mailingreworked_myobject VALUES (
 	1, 1, 'mydata'
 );
+-- AJOUT DE COLONNE POUR UN MAIL PAR DEFAUT LORS DE LA CREATION D'UNE TEMPLATE'
+ALTER TABLE llx_c_email_templates ADD COLUMN fromMail varchar(256) DEFAULT 'dne-gar@education.gouv.fr';
+
+-- TEMPLATE PAR DEFAUT
+INSERT INTO `llx_c_email_templates`(`type_template`,`label`, `position`,`topic`, `content`, `fromMail`) VALUES ('Modèle Vierge','Modèle Vierge',1,' ',' ',' ');
+
+-- SUPPRIMER LES TEMPLATES DOLIBARR
+DELETE FROM `llx_c_email_templates` WHERE `llx_c_email_templates`.`rowid` = 1;
+DELETE FROM `llx_c_email_templates` WHERE `llx_c_email_templates`.`rowid` = 2;
+DELETE FROM `llx_c_email_templates` WHERE `llx_c_email_templates`.`rowid` = 3;
+DELETE FROM `llx_c_email_templates` WHERE `llx_c_email_templates`.`rowid` = 4;
+DELETE FROM `llx_c_email_templates` WHERE `llx_c_email_templates`.`rowid` = 5;
+DELETE FROM `llx_c_email_templates` WHERE `llx_c_email_templates`.`rowid` = 6;
+DELETE FROM `llx_c_email_templates` WHERE `llx_c_email_templates`.`rowid` = 7;
+
+

@@ -72,5 +72,27 @@ else header('Cache-Control: no-cache');
 .myclasscss {
 	/* ... */
 }
+.buttonStatic {
+	height: 20px;
+	width: 150px;
+	margin-bottom: 3px;
+	margin-top: 3px;
+	margin-left: 10px;
+	margin-right: 10px;
+	font-family: <?php print $fontlist ?>;
+	border-color: #c5c5c5;
+	border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
+	display: inline-block;
+	padding: 12px 18px 12px 18px;
+	text-align: center;
+	cursor: pointer;
+	text-decoration: none !important;
+	background-color: #3699ff;
+	color:#FFF;
+	border-color: #3699ff;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	float:right;
+}
 
 
