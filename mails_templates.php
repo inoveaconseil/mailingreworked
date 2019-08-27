@@ -862,6 +862,7 @@ if ($resql)
 
                 // Can an entry be erased or disabled ?
                 $iserasable=1;$canbedisabled=1;$canbemodified=1;	// true by default
+				$valuetoshow=$obj->{$fieldlist[$field]};
                 if (! $user->admin && $obj->fk_user != $user->id)
                 {
                 	$iserasable=0;
@@ -880,12 +881,13 @@ if ($resql)
 
                 // Modify link / Delete link
                 print '<td class="center nowraponall" width="64">';
-                if ($canbemodified) print '<a class="reposition" href="'.$url.'action=edit">'.img_edit().'</a>';
-                if ($iserasable)
-                {
-                    print ' &nbsp; <a href="'.$url.'action=delete">'.img_delete().'</a>';
-                    //else print '<a href="#">'.img_delete().'</a>';    // Some dictionary can be edited by other profile than admin
-                }
+                if ($valuetoshow!=' ') {
+					if ($canbemodified) print '<a class="reposition" href="' . $url . 'action=edit">' . img_edit() . '</a>';
+					if ($iserasable) {
+						print ' &nbsp; <a href="' . $url . 'action=delete">' . img_delete() . '</a>';
+						//else print '<a href="#">'.img_delete().'</a>';    // Some dictionary can be edited by other profile than admin
+					}
+				}
                 print '</td>';
 
                 /*
