@@ -494,7 +494,7 @@ if ($action == 'create') {
 	/*
 	 * Affichage des catégories présentes dans la BDD
 	 */
-	print '<tr><td>' . $langs->trans("Category") . '</td><td><select id="titre">';
+	print '<tr><td>' . $langs->trans("ModeleType") . '</td><td><select id="titre">';
 	print '<option><strong>'.$titreSelect.' </strong></option>';
 
 	$sql = "SELECT DISTINCT type_template";

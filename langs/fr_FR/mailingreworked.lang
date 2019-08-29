@@ -53,6 +53,7 @@ EditMail = Retour à l'édition
 Send = Valider l'envoi
 Edition = Édition
 BackToCibles = Afficher la liste des destinataires
+ModeleType = Type de modèle
 
 ModeleName = Nom du modèle
 

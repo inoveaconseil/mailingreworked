@@ -205,7 +205,7 @@ if ($result)
 	print '<tr class="liste_titre">';
 	//print_liste_field_titre("Ref",$_SERVER["PHP_SELF"],"m.rowid",$param,"","",$sortfield,$sortorder);
 	print_liste_field_titre("Objet",$_SERVER["PHP_SELF"],"m.sujet",$param,"","",$sortfield,$sortorder);
-	print_liste_field_titre("Category",$_SERVER["PHP_SELF"],"m.titre",$param,"","",$sortfield,$sortorder); //titre
+	print_liste_field_titre("ModeleType",$_SERVER["PHP_SELF"],"m.titre",$param,"","",$sortfield,$sortorder); //titre
 	print_liste_field_titre("DateCreation",$_SERVER["PHP_SELF"],"m.date_creat",$param,"",'align="center"',$sortfield,$sortorder);
 	if (! $filteremail) print_liste_field_titre("NbOfEMails",$_SERVER["PHP_SELF"],"m.nbemail",$param,"",'align="center"',$sortfield,$sortorder);
 	if (! $filteremail) print_liste_field_titre("DateLastSend",$_SERVER["PHP_SELF"],"m.date_envoi",$param,"",'align="center"',$sortfield,$sortorder);
