@@ -33,7 +33,7 @@ require_once DOL_DOCUMENT_ROOT.'/custom/mailingreworked/class/CMailFile.class.ph
 require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
 
 // Load translation files required by the page
-$langs->load("mails");
+$langs->loadLangs(array("errors","admin","mails","languages","mailingreworked@mailingreworked","partnersdata@partnersdata"));
 
 // Security check
 if (! $user->rights->mailing->lire || $user->societe_id > 0) accessforbidden();

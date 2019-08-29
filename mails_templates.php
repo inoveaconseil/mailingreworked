@@ -43,7 +43,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/accounting.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.formaccounting.class.php';
 
 // Load translation files required by the page
-$langs->loadLangs(array("errors","admin","mails","languages"));
+$langs->loadLangs(array("errors","admin","mails","languages","mailingreworked@mailingreworked","partnersdata@partnersdata"));
 
 $action     = GETPOST('action','alpha')?GETPOST('action','alpha'):'view';
 $confirm    = GETPOST('confirm','alpha');												// Result of a confirmation

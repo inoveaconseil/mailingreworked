@@ -26,7 +26,7 @@ require '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/custom/mailingreworked/class/mailing.class.php';
 
 // Load translation files required by the page
-$langs->load("mails");
+$langs->loadlangs(array ("mailingreworked@mailingreworked", "mails", "partnersdata@partnersdata"));
 
 // Security check
 $result=restrictedArea($user,'mailing');
