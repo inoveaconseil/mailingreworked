@@ -922,14 +922,14 @@ if ($action=='edithtml') {
 			{
 				// Editor HTML source
 				require_once DOL_DOCUMENT_ROOT.'/core/class/doleditor.class.php';
-				$doleditor=new DolEditor('bodyemail',$object->body,'',600,'dolibarr_mailings','',true,true,'ace',20,'90%');
+				$doleditor=new DolEditor('bodyemail',$object->body,'',600,'full','',true,true,'ace',20,'90%');
 				$doleditor->Create(0, '', false, 'HTML Source', 'php');
 			} else {
 				print '<div style="padding-top: 10px">';
 
 				// Editeur wysiwyg
 				require_once DOL_DOCUMENT_ROOT . '/custom/mailingreworked/class/doleditor.class.php';
-				$doleditor = new DolEditor('bodyemail', $object->body, '', 600, 'dolibarr_mailings', '', true, true, $conf->global->FCKEDITOR_ENABLE_MAILING, 20, '90%');
+				$doleditor = new DolEditor('bodyemail', $object->body, '', 600, 'full', '', true, true, $conf->global->FCKEDITOR_ENABLE_MAILING, 20, '90%');
 				$doleditor->Create();
 			}
 			print '</div>';
