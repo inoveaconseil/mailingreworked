@@ -97,11 +97,15 @@ function fb_emailing_prepare_head(FBMailing $object)
 	$head[$h][2] = 'visu';
 	$h++;
 
+	$head[$h][0] = DOL_URL_ROOT."/custom/mailingreworked/stat.php?id=".$object->id;
+	$head[$h][1] = '<span class="fa-stack fa-1g"><i class="fa fa-circle-o fa-stack-2x"></i><strong class="fa-stack-1x">4</strong></span> '.$langs->trans("MonitoringMail");
+	$head[$h][2] = 'stat';
+	$h++;
 
 
-	complete_head_from_modules($conf,$langs,$object,$head,$h,'emailing');
+	//complete_head_from_modules($conf,$langs,$object,$head,$h,'emailing');
 
-	complete_head_from_modules($conf,$langs,$object,$head,$h,'emailing','remove');
+	//complete_head_from_modules($conf,$langs,$object,$head,$h,'emailing','remove');
 
 	return $head;
 }
@@ -146,11 +150,15 @@ function fb_emailing_prepare_head_inactiv(FBMailing $object)
 	$head[$h][2] = 'visu';
 	$h++;
 
+	$head[$h][0] = 'javascript:void(0);';
+	$head[$h][1] = '<div style="pointer-events: none;cursor: default; color: rgba(0,0,0,.5) !important"><span class="fa-stack fa-1g"><i class="fa fa-circle-o fa-stack-2x"></i><strong class="fa-stack-1x">4</strong></span> '.$langs->trans("MonitoringMail").'</div>';
+	$head[$h][2] = 'stat';
+	$h++;
 
 
-	complete_head_from_modules($conf,$langs,$object,$head,$h,'emailing');
+	//complete_head_from_modules($conf,$langs,$object,$head,$h,'emailing');
 
-	complete_head_from_modules($conf,$langs,$object,$head,$h,'emailing','remove');
+	//complete_head_from_modules($conf,$langs,$object,$head,$h,'emailing','remove');
 
 	return $head;
 }

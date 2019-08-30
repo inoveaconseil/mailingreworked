@@ -65,3 +65,25 @@ Invitation = Invitation
 BackToEditor = Editeur de texte
 ConfirmSendMailing = Confirmez-vous l'envoi de l'emailing ?
 SendTest = Envoyer test
+
+
+
+Module432405Name = Statistiques Emailing
+Module432405Desc = Statistiques des emailing et export csv des emails par statut
+
+CSVSendFile = Fichier CSV des destinataires ayant reçu l'email
+CSVSeeFile = Fichier CSV des destinataires ayant lu l'email
+CSVErrorFile = Fichier CSV des destinataires en erreur
+CSVNotcontactedFile = Fichier CSV des destinataires ne souhaitant plus recevoir d'email
+
+send=Envoyé
+notcontacted=Desinscription
+see=Lu
+error=Erreur
+Statistiques=Statistiques
+Emailingnotsend=L'emailing n'a pas été envoyé.
+statsemailing=Statistiques Emailing
+statsemailingSetup=Paramétrages
+Statsemailing=Statistiques
+MonitoringMail = Suivi
+
