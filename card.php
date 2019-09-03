@@ -207,7 +207,7 @@ if (empty($reshook)) {
 					require_once DOL_DOCUMENT_ROOT . '/core/lib/files.lib.php';
 
 					// Set tmp user directory
-					dol_add_file_process($upload_dir, 0, 0, 'addedfile', '',null,'',0);
+					dol_fb_add_file_process($upload_dir, 0, 0, 'addedfile', '',null,'',0);
 				}
 				header("Location: " . DOL_URL_ROOT . "/custom/mailingreworked/cibles.php?id=" . $object->id );
 				exit;
