@@ -564,7 +564,7 @@ if ($action == 'create') {
 	print '</select></td></tr>';
 
 
-	print '<tr><td class="fieldrequired">' . $langs->trans("MailFrom") . ' <strong style="color: red" >*</strong></td><td><input class="flat minwidth200" name="from" value="' .$line->fromMail. '">&nbsp; <input type="checkbox" id="errorstosender"  > <label for="errorstosender"> Erreurs vers l\'émetteur</label></td></tr>';
+	print '<tr><td class="fieldrequired">' . $langs->trans("MailFrom") . ' <strong style="color: red" >*</strong></td><td><input class="flat minwidth200" name="from" value="' .$line->fromMail. '">&nbsp; <input style=" vertical-align:middle" type="checkbox" id="errorstosender"  > &nbsp;<label for="errorstosender"> Erreurs vers l\'émetteur</label></td></tr>';
 	print '<tr id="error"><td>' . $langs->trans("MailErrorsTo") . '</td><td><input class="flat minwidth200" name="errorsto" value="' . (!empty($conf->global->MAILING_EMAIL_ERRORSTO) ? $conf->global->MAILING_EMAIL_ERRORSTO : $conf->global->MAIN_MAIL_ERRORS_TO) . '"></td></tr>';
 
 	// Other attributes
@@ -626,8 +626,8 @@ if ($action == 'create') {
 	$doleditor = new DolEditor('bodyemail', $line->content, '', 600, 'dolibarr_mailings', '', true, true, $conf->global->FCKEDITOR_ENABLE_MAILING, 20, '90%');
 	$doleditor->Create();
 	print '</div>';
-	print '<input type="checkbox" name="checkread" id="checkread"><label for="checkread">Suivre l\'ouverture de l\'email</label> <br> ';
-	print '<input type="checkbox" name="unsubscribeLink" id="unsubscribeLink"><label for="unsubscribeLink">Lien de désinscription</label> <br> ';
+	print '<input type="checkbox" style=" vertical-align:middle" name="checkread" id="checkread">&nbsp;&nbsp;<label for="checkread">Suivre l\'ouverture de l\'email</label> <br> ';
+	print '<input type="checkbox" style=" vertical-align:middle" name="unsubscribeLink" id="unsubscribeLink">&nbsp;&nbsp;<label for="unsubscribeLink">Lien de désinscription</label> <br> ';
 
 	dol_fiche_end();
 
