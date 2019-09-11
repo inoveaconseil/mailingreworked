@@ -623,7 +623,7 @@ if ($action == 'create') {
 	print '<div style="padding-top: 10px">';
 	// Editeur wysiwyg
 	require_once DOL_DOCUMENT_ROOT . '/custom/mailingreworked/class/doleditor.class.php';
-	$doleditor = new DolEditor('bodyemail', $line->content, '', 600, 'dolibarr_mailings', '', true, true, $conf->global->FCKEDITOR_ENABLE_MAILING, 20, '90%');
+	$doleditor = new DolEditor('bodyemail', $line->content, '', 600, 'full', '', true, true, $conf->global->FCKEDITOR_ENABLE_MAILING, 20, '90%');
 	$doleditor->Create();
 	print '</div>';
 	print '<input type="checkbox" style=" vertical-align:middle" name="checkread" id="checkread">&nbsp;&nbsp;<label for="checkread">Suivre l\'ouverture de l\'email</label> <br> ';
