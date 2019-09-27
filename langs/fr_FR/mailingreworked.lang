@@ -58,7 +58,7 @@ ModeleType = Type de modèle
 ModeleName = Nom du modèle
 
 InformationLetter = Lettre d'information
-InfoAlert = Alerte Info
+InfoAlert = Notification
 SendAgain = Relance
 Invitation = Invitation
 
