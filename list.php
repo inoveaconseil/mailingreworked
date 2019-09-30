@@ -114,7 +114,7 @@ if (empty($reshook))
  * View
  */
 
-llxHeader('',$langs->trans("Mailing"),'EN:Module_EMailing|FR:Module_Mailing|ES:M&oacute;dulo_Mailing');
+llxHeader('',$langs->trans("ListOfEMailings"),'EN:Module_EMailing|FR:Module_Mailing|ES:M&oacute;dulo_Mailing');
 
 $form = new Form($db);
 

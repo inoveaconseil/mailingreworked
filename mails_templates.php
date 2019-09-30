@@ -407,9 +407,10 @@ if (empty($reshook))
 $form = new Form($db);
 $formadmin=new FormAdmin($db);
 
-llxHeader();
+
 
 $titre=$langs->trans("EMailsSetup");
+llxHeader('',$titre);
 $linkback='';
 $titlepicto='title_setup';
 
