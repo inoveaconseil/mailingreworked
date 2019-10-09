@@ -565,7 +565,7 @@ if ($action == 'create') {
 
 
 	print '<tr><td class="fieldrequired">' . $langs->trans("MailFrom") . ' <strong style="color: red" >*</strong></td><td><input class="flat minwidth200" name="from" value="' .$line->fromMail. '">&nbsp; <input style=" vertical-align:middle" type="checkbox" id="errorstosender"  > &nbsp;<label for="errorstosender"> Erreurs vers l\'émetteur</label></td></tr>';
-	print '<tr id="error"><td>' . $langs->trans("MailErrorsTo") . '</td><td><input class="flat minwidth200" name="errorsto" value="' . (!empty($conf->global->MAILING_EMAIL_ERRORSTO) ? $conf->global->MAILING_EMAIL_ERRORSTO : $conf->global->MAIN_MAIL_ERRORS_TO) . '"></td></tr>';
+	print '<tr id="error"><td>' . $langs->trans("MailErrorsTo") . '</td><td><input class="flat minwidth200" name="errorsto" value="gar-di-en@effios.fr"></td></tr>';
 
 	// Other attributes
 	$parameters = array();
