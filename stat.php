@@ -142,7 +142,7 @@ if($object->statut == 3 || $object->statut == 2){
             print '<tr><td>';
             print $langs->trans("Statistiques");
             print '</td><td colspan="3">';
-            print $langs->trans("send").": ".$send->count."<br />".$langs->trans("see").": ".$see->count."<br />".$langs->trans("notcontacted").": ".$notc->count."<br />".$langs->trans("error").": ".$err->count;
+            print $langs->trans("send").": ".($send->count + $see->count)."<br />".$langs->trans("see").": ".$see->count."<br />".$langs->trans("notcontacted").": ".$notc->count."<br />".$langs->trans("error").": ".$err->count;
             print '</td></tr>';
             
             print '</table>';
