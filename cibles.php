@@ -500,11 +500,8 @@ if ($object->fetch($id) >= 0)
         print '<input type="hidden" name="page" value="'.$page.'">';
 		print '<input type="hidden" name="id" value="'.$object->id.'">';
 
-		$cleartext='';
-		if ($allowaddtarget) {
-		    $cleartext=$langs->trans("ToClearAllRecipientsClickHere").' '.'<a href="'.$_SERVER["PHP_SELF"].'?clearlist=1&id='.$object->id.'" class="button reposition">'.$langs->trans("TargetsReset").'</a>';
-		}
-		print_barre_liste($langs->trans("MailSelectedRecipients"),$page,$_SERVER["PHP_SELF"],$param,$sortfield,$sortorder,$cleartext,$num,$nbtotalofrecords,'title_generic',0,'','', $limit);
+
+		print_barre_liste($langs->trans("MailSelectedRecipients"),$page,$_SERVER["PHP_SELF"],$param,$sortfield,$sortorder,'',$num,$nbtotalofrecords,'title_generic',0,'','', $limit);
 
 		print '</form>';
 
@@ -679,7 +676,13 @@ if ($object->fetch($id) >= 0)
 			}
 		}
 		print "</table><br>";
+		if ($allowaddtarget) {
+			print '<br><br>';
+			print  '<a class="buttonRed" onclick="return confirm(\'Attention, vous allez supprimer tous les destinataires de votre emailing.\nÊtes-vous sûr de vouloir vider la liste ?\')" style="color:#FFF" href="'.$_SERVER["PHP_SELF"].'?clearlist=1&id='.$object->id.'">'.$langs->trans("EmptyList").'</a>';
+			print '<br><br>';
+		}
 		print '</div>';
+
 
 
 		print '<a class="button" style="color:#FFFFFF" href="'.DOL_URL_ROOT.'/custom/mailingreworked/card.php?id='.$object->id.'&action=visu">'.$langs->trans("VisualizationMail").'</a>';
